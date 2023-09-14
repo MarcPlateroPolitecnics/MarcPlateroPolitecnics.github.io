@@ -1,0 +1,4 @@
+config.js // Configuració de la webApp
+events.js // Events de la webApp
+tools.js  // Arxiu d’eines pròpies que es poden aprofitar en altres WebApps
+nomWebApp.js // Arxiu amb les funcionalitats pròpies de la webApp
