@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+  <head>    
+    <script src="calculadoraDePropines.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <div class="container">
+        <br><h2>M06 REP_01 - Calculadora de propines</h2>
+        <h3>Calcula una propina justa</h3><br>
+        <form id="formulari" class="row"> 
+            <label class="form-label">Quants som?</label>           
+            <input class="form-control" type="number" id="numPersones" name="numPersones" required min="1"></input>
+            <label style="margin-top: 30px;" class="form-label">Quin és el total de la factura? </label>
+            <input class= "form-control" type="number" id="totalFactura" name="totalFactura" required min="0.01"></input>
+            <label style="margin-top: 30px;" class="form-label">Opina sobre el servei</label>
+            <select class= "form-control" id="opcionsServei" name="opcionsServei" required>
+                <option value="selecciona" disabled selected>Selecciona entre les diferents opcions de valoració</option>
+                <option value="genial">Genial</option>
+                <option value="acceptable">Acceptable</option>
+                <option value="horrible">Horrible</option>
+            </select><br><br>
+            <button  class="btn btn-primary" type="button" style="margin-top: 90px;" onclick="calcularPropina()">Calcular la propina</button>
+            <div id="resultat" style="display: none; margin-top: 20px;">
+                <h4>
+                  <p id="propinaPerPersona"></p>
+                </h4>
+                <h4 id="propinaInferiorTitulo" style="display: none;">
+                  <p id="propinaPerPersonaMinim"></p>
+                  <p id="propinaPerPersonaInferior"></p>
+                </h4>
+              </div>
+        </form>
+    </div>
+</body>
+
+</html>
