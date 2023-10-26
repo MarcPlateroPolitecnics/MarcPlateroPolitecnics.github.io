@@ -1,37 +1,44 @@
- #window {
-    position: relative;
-    width: 800px;
-    height: 600px;
-    margin: 150px auto;
-    border: 2px solid #000;
-  }
-  
-  #player {
-    position: absolute;
-    width: 50px;
-    height: 50px;
-    background-color: #000;
-  }
-  
-  #fruit {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: white;
-  }
-  
-  #score {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    font-size: 20px;
-    color: #000;
-  }
-  
-  #title {
-    position: absolute;
-    top: 50px;
-    margin-left: 700px;
-    font-size: 30px;
-    color: #000;
-  }
+#window {
+  position: relative;
+  width: 800px;
+  height: 600px;
+  margin: 150px auto;
+  border: 2px solid #000;
+  overflow: hidden; /* Amb això puc evitar que els elements surtin del marc del joc. */
+}
+
+#background1 {
+  position: fixed;
+  width: 800px;
+  height: 600px;
+}
+
+#player {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #000;
+}
+
+#fruit {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 20px;
+  color: #000;
+}
+
+#title {
+  position: absolute;
+  top: 50px;
+  margin-left: 700px;
+  font-size: 30px;
+  color: #000;
+}
