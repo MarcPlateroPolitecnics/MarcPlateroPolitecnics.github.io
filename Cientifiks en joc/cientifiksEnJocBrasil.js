@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Math.random() * (gameContainer.clientWidth - fruitSize),
     0,
   ];
-  const fruitSpeed = 5;
+  const fruitSpeed = 3;
   let playerPos = [...initialPlayerPos];
   let fruitPos = [...initialFruitPos];
   let score = 0;
