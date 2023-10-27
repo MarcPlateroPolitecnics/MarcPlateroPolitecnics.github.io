@@ -1,6 +1,6 @@
 #window {
   position: relative;
-  width: 800px;
+  width: 1000px;
   height: 600px;
   margin: 150px auto;
   border: 2px solid #000;
@@ -9,15 +9,14 @@
 
 #background1 {
   position: fixed;
-  width: 800px;
+  width: 1000px;
   height: 600px;
 }
 
 #player {
   position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: #000;
+  width: 90px;
+  height: 135px;
 }
 
 #fruit {
@@ -28,9 +27,9 @@
 }
 
 #score {
-  position: absolute;
+  position:absolute;
   top: 10px;
-  left: 10px;
+  left: 750px;
   font-size: 20px;
   color: #000;
 }
