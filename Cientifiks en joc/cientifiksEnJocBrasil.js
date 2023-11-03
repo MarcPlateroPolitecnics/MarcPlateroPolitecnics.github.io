@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const scoreValue = document.getElementById("scoreValue");
   const livesValue = document.getElementById("livesValue");
 
-  const playerSize = 50;  
+  const playerSize = 50;
   const fruitSize = 30;
   const initialPlayerPos = [
     gameContainer.clientWidth / 2 - playerSize / 2,
@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let fruitPos = [...initialFruitPos];
   let score = 0;
   let lives = 5;
-  let doubleFruits = false; // Nova variable per controlar les dues fruites.
-  const doubleFruitThreshold = 10; // Puntuació per activar les dues fruites.
+  let doubleFruits = false;
+  const doubleFruitThreshold = 10;
 
   function draw() {
     player.style.left = `${playerPos[0]}px`;
@@ -33,10 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
     scoreValue.textContent = score;
     livesValue.textContent = lives;
 
-    // Moure fruita.
     fruitPos[1] += fruitSpeed;
 
-    // Verificar col·lisió.
     if (
       playerPos[0] < fruitPos[0] + fruitSize &&
       playerPos[0] + playerSize > fruitPos[0] &&
@@ -46,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
       score++;
 
       if (score === doubleFruitThreshold && !doubleFruits) {
-        // Activa les dues fruites quan s'arriba a 10 punts.
         doubleFruits = true;
         spawnDoubleFruits();
         changeBackground();
@@ -58,15 +55,19 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Verificar caiguda de fruita al terra.
+    // Verificar si es perden totes les vides
     if (fruitPos[1] > gameContainer.clientHeight) {
       if (fruitPos[1] + fruitSize > gameContainer.clientHeight) {
-        // Restar vida només si la part inferior de la fruta toca el marc.
         lives--;
-        fruitPos = [
-          Math.random() * (gameContainer.clientWidth - fruitSize),
-          0,
-        ];
+
+        if (lives <= 0) {
+          restartGame();
+        } else {
+          fruitPos = [
+            Math.random() * (gameContainer.clientWidth - fruitSize),
+            0,
+          ];
+        }
       }
     }
 
@@ -74,15 +75,14 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function spawnDoubleFruits() {
-    // Genera dues posicions aleatòries per a les dues fruites
     const secondFruitPos = [
       Math.random() * (gameContainer.clientWidth - fruitSize),
       0,
     ];
 
-    // Crea una segona fuita
     const secondFruit = document.createElement("img");
-    secondFruit.src = "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/banana.png";
+    secondFruit.src =
+      "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/banana.png";
     secondFruit.style.position = "absolute";
     secondFruit.style.width = `${fruitSize}px`;
     secondFruit.style.height = `${fruitSize}px`;
@@ -91,24 +91,26 @@ document.addEventListener("DOMContentLoaded", function () {
     function drawSecondFruit() {
       secondFruit.style.left = `${secondFruitPos[0]}px`;
       secondFruit.style.top = `${secondFruitPos[1]}px`;
-      secondFruitPos[1] += fruitSpeed * 1.5; // Ajusta la velocitat de la segona fuita.
+      secondFruitPos[1] += fruitSpeed * 1.5;
 
+      // Comprovem si la segona fruita és recollida
       if (
         playerPos[0] < secondFruitPos[0] + fruitSize &&
         playerPos[0] + playerSize > secondFruitPos[0] &&
         playerPos[1] < secondFruitPos[1] + fruitSize &&
         playerPos[1] + playerSize > secondFruitPos[1]
       ) {
-        // Incrementa la puntuació quan es recull la segona fuita.
         score++;
-        secondFruitPos = [
-          Math.random() * (gameContainer.clientWidth - fruitSize),
-          0,
-        ];
+        // Eliminem la segona fruita
+        gameContainer.removeChild(secondFruit);
+        // Creem una nova segona fruita
+        spawnDoubleFruits();
       }
 
-      // Verifica si la segona fuita ha caigut al terra.
       if (secondFruitPos[1] > gameContainer.clientHeight) {
+        // Resta una vida quan la banana toca el terra
+        lives--;
+        // Eliminem la segona fruita
         gameContainer.removeChild(secondFruit);
       } else {
         requestAnimationFrame(drawSecondFruit);
@@ -119,11 +121,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function changeBackground() {
-    // Canvia el fons després d'aconseguir els 10 punts.
-    document.getElementById("background1").src = "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/brasilFondo2.jpg";
+    document.getElementById("background1").src =
+      "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/brasilFondo2.jpg";
   }
 
   function restartGame() {
+    const secondFruit = document.querySelector(
+      "#window img[src$='banana.png']"
+    );
+    if (secondFruit) {
+      gameContainer.removeChild(secondFruit);
+    }
+
+    document.getElementById("background1").src =
+      "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/brasilFondo1.jpg";
+
     playerPos = [...initialPlayerPos];
     fruitPos = [...initialFruitPos];
     score = 0;
@@ -131,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   document.addEventListener("keydown", function (e) {
-    const movementSpeed = 50; // Augmentar aquest valor per així augmentar la velocitat del jugador.
+    const movementSpeed = 50;
 
     if (e.key === "ArrowLeft" && playerPos[0] > 0) {
       playerPos[0] -= movementSpeed;
@@ -146,3 +158,4 @@ document.addEventListener("DOMContentLoaded", function () {
   restartGame();
   draw();
 });
+
