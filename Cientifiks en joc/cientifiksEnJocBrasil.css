@@ -4,10 +4,10 @@
   height: 600px;
   margin: 150px auto;
   border: 2px solid #000;
-  overflow: hidden; /* Amb això puc evitar que els elements surtin del marc del joc. */
+  overflow: hidden;
 }
 
-#background1 {
+#background {
   position: fixed;
   width: 1000px;
   height: 600px;
