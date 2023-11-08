@@ -24,6 +24,11 @@ document.addEventListener("DOMContentLoaded", function () {
   let lives = 5;
   let currentLevel = 1;
   const levelThresholds = [0, 10, 25, 50];
+  const fruits = [
+    "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/apple.jpg",
+    "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/banana.png",
+    "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/mango.png"
+  ];
 
   function draw() {
     player.style.left = `${playerPos[0]}px`;
@@ -49,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (currentLevel < levelThresholds.length - 1) {
           currentLevel++;
           changeBackground();
+          changeFruit();
         }
       }
 
@@ -84,6 +90,10 @@ document.addEventListener("DOMContentLoaded", function () {
     background.src = `C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/brasilFondo${currentLevel + 1}.jpg`;
   }
 
+  function changeFruit() {
+    fruit.src = fruits[currentLevel - 1];
+  }
+
   function restartGame() {
     playerPos = [...initialPlayerPos];
     fruitPos = [...initialFruitPos];
@@ -91,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     lives = 5;
     currentLevel = 1;
     background.src = initialBackground;
+    fruit.src = fruits[0];
   }
 
   function endGame() {
@@ -114,4 +125,3 @@ document.addEventListener("DOMContentLoaded", function () {
   restartGame();
   draw();
 });
-
