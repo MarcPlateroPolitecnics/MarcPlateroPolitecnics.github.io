@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentLevel = 1;
   const levelThresholds = [0, 10, 25, 50];
   const fruits = [
-    "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/apple.jpg",
+    "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/papaya.png",
     "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/banana.png",
     "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/mango.png"
   ];
@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function endGame() {
     // Implementar lógica de finalización del juego
+    background.src = "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/brasilFondoFinal.jpg";
     alert("¡Has alcanzado 50 puntos! ¡Fin del juego!");
   }
 
@@ -125,3 +126,4 @@ document.addEventListener("DOMContentLoaded", function () {
   restartGame();
   draw();
 });
+
