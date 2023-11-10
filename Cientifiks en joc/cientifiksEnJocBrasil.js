@@ -107,7 +107,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function endGame() {
     // Implementar lógica de finalización del juego
     background.src = "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/brasilFondoFinal.jpg";
-    alert("¡Has alcanzado 50 puntos! ¡Fin del juego!");
+    const endMessage = document.getElementById("endMessage");
+    endMessage.textContent = "Meninas da aldeia: Obrigado por colher as frutas, agora podemos distribuí-las às crianças pobres. Pelo grande favor que você nos fez, nós lhe daremos uma recompensa.";
   }
 
   document.addEventListener("keydown", function (e) {
@@ -126,4 +127,5 @@ document.addEventListener("DOMContentLoaded", function () {
   restartGame();
   draw();
 });
+
 
