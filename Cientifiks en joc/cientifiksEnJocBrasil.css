@@ -41,3 +41,15 @@
   font-size: 30px;
   color: #000;
 }
+
+#endMessage {
+  position: absolute;
+  top: 800px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  color: #000;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+}
