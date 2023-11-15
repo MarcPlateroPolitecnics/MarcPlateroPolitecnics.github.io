@@ -1,43 +1,64 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+#window {
+  position: relative;
+  width: 1000px;
+  height: 600px;
+  margin: 150px auto;
+  border: 2px solid #000;
+  overflow: hidden;
 }
 
-h1 {
-    color: #333;
+#background {
+  position: fixed;
+  width: 1000px;
+  height: 600px;
 }
 
-p {
-    color: #666;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
+#player {
+  position: absolute;
+  width: 90px;
+  height: 135px;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+#fruit {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: rgba(255, 255, 255, 0);
 }
 
-li {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
+#score {
+  position:absolute;
+  top: 115px;
+  left: 1215px;
+  font-size: 20px;
+  color: #000;
 }
 
-img {
-    max-width: 100px;
-    border-radius: 10%;
-    margin-right: 20px;
+#title {
+  position: absolute;
+  top: 60px;
+  margin-left: 700px;
+  font-size: 30px;
+  color: #000;
 }
 
-img[alt="Imagen juego"] {
-    max-width: 100px;
-    border-radius: 50%;
-    margin-left: 20px;
+#backButton {
+  position: absolute;
+  top: 775px;
+  margin-left: 450px;
+  font-size: 25px;
+  color: #000;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#endMessage {
+  position: absolute;
+  top: 825px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  color: #000;
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
 }
