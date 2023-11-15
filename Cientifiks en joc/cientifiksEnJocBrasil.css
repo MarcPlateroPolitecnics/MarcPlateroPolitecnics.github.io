@@ -28,23 +28,32 @@
 
 #score {
   position:absolute;
-  top: 10px;
-  left: 750px;
+  top: 115px;
+  left: 1215px;
   font-size: 20px;
   color: #000;
 }
 
 #title {
   position: absolute;
-  top: 50px;
+  top: 60px;
   margin-left: 700px;
   font-size: 30px;
   color: #000;
 }
 
+#backButton {
+  position: absolute;
+  top: 775px;
+  margin-left: 450px;
+  font-size: 25px;
+  color: #000;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
 #endMessage {
   position: absolute;
-  top: 800px;
+  top: 825px;
   left: 50%;
   transform: translateX(-50%);
   font-size: 22px;
