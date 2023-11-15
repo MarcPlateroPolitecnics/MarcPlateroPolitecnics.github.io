@@ -124,8 +124,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  // Afegir un event listener al botó
+  const backButton = document.getElementById("backButton");
+  backButton.addEventListener("click", function () {
+    // Redirigir l'usuari cap a la landing page (modifica la URL segons sigui necessari)
+    window.location.href = "ruta-de-la-landing-page.html";
+  });
+
   restartGame();
   draw();
 });
-
-
