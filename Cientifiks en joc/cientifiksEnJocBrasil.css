@@ -29,9 +29,21 @@
 #score {
   position:absolute;
   top: 115px;
-  left: 1215px;
+  left: 1290px;
   font-size: 20px;
   color: #000;
+}
+
+#fruitsCollected {
+  width: 24px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+#heart {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 #title {
