@@ -1,3 +1,7 @@
+body {
+  background-color:rgb(127, 255, 159);
+}
+
 #window {
   position: relative;
   width: 1000px;
@@ -52,6 +56,7 @@
   margin-left: 700px;
   font-size: 30px;
   color: #000;
+  font-family: Helvetica, sans-serif;
 }
 
 #backButton {
