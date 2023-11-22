@@ -1,4 +1,6 @@
+// Espera a que el DOM (la part de html) estigui carregat.
 document.addEventListener("DOMContentLoaded", function () {
+  // Obté elements del DOM.
   const gameContainer = document.getElementById("window");
   const player = document.getElementById("player");
   const fruit = document.getElementById("fruit");
@@ -6,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const livesValue = document.getElementById("livesValue");
   const background = document.getElementById("background");
 
+  // Diferents constants del joc.
   const playerSize = 50;
   const fruitSize = 30;
   const initialPlayerPos = [
@@ -16,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     Math.random() * (gameContainer.clientWidth - fruitSize),
     0,
   ];
-  const initialBackground = "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/brasilFondo1.jpg";
+  const initialBackground = "./img/backgrounds/brasilFondo1.jpg";
   const fruitSpeeds = [3, 5, 6];
   let playerPos = [...initialPlayerPos];
   let fruitPos = [...initialFruitPos];
@@ -25,31 +28,36 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentLevel = 1;
   const levelThresholds = [0, 10, 25, 50];
   const fruits = [
-    "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/papaya.png",
-    "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/banana.png",
-    "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/fruits/mango.png"
+    "./img/fruits/papaya.png",
+    "./img/fruits/banana.png",
+    "./img/fruits/mango.png"
   ];
 
+  // Funció principal que actualitza el dibuix del joc.
   function draw() {
+    // Actualitza la posició del jugador i la fruita.
     player.style.left = `${playerPos[0]}px`;
     player.style.top = `${playerPos[1]}px`;
 
     fruit.style.left = `${fruitPos[0]}px`;
     fruit.style.top = `${fruitPos[1]}px`;
 
+    // Actualitza la puntuació i les vides.
     scoreValue.textContent = score;
     livesValue.textContent = lives;
 
+    // Mou la fruita cap avall.
     fruitPos[1] += fruitSpeeds[currentLevel - 1];
 
+    // Comprova col·lisions amb el jugador.
     if (
       playerPos[0] < fruitPos[0] + fruitSize &&
       playerPos[0] + playerSize > fruitPos[0] &&
       playerPos[1] < fruitPos[1] + fruitSize &&
       playerPos[1] + playerSize > fruitPos[1]
     ) {
+      // Incrementa la puntuació i verifica si es passa al següent nivell.
       score++;
-
       if (score === levelThresholds[currentLevel]) {
         if (currentLevel < levelThresholds.length - 1) {
           currentLevel++;
@@ -58,15 +66,17 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
+      // Reinicia la posició de la fruita.
       fruitPos = [
         Math.random() * (gameContainer.clientWidth - fruitSize),
         0,
       ];
     }
 
+    // Comprova si la fruita ha arribat a la part inferior del marc.
     if (fruitPos[1] > gameContainer.clientHeight) {
+      // Redueix les vides i reinicia la posició de la fruita si encara hi ha vides.
       lives--;
-
       if (lives <= 0) {
         restartGame();
       } else {
@@ -77,23 +87,28 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
+    // Comprova si s'ha assolit la puntuació màxima.
     if (score >= levelThresholds[levelThresholds.length - 1]) {
-      // Finalizar el juego
+      // Finalitza el joc.
       endGame();
       return;
     }
 
+    // Continua actualitzant el dibuix del joc.
     requestAnimationFrame(draw);
   }
 
+  // Canvia la imatge de fons segons el nivell actual.
   function changeBackground() {
-    background.src = `C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/brasilFondo${currentLevel + 1}.jpg`;
+    background.src = `./img/backgrounds/brasilFondo${currentLevel + 1}.jpg`;
   }
 
+  // Canvia la imatge de la fruita segons el nivell actual.
   function changeFruit() {
     fruit.src = fruits[currentLevel - 1];
   }
 
+  // Reinicia els valors del joc.
   function restartGame() {
     playerPos = [...initialPlayerPos];
     fruitPos = [...initialFruitPos];
@@ -104,13 +119,14 @@ document.addEventListener("DOMContentLoaded", function () {
     fruit.src = fruits[0];
   }
 
+  // Finalitza el joc i mostra un missatge final.
   function endGame() {
-    // Implementar lógica de finalización del juego
-    background.src = "C:/Users/cep.ID21090261/Desktop/Descargar Xampp/xampp/htdocs/M12/img/brasilFondoFinal.jpg";
+    background.src = "./img/backgrounds/brasilFondoFinal.jpg";
     const endMessage = document.getElementById("endMessage");
     endMessage.textContent = "Meninas da aldeia: Obrigado por colher as frutas, agora podemos distribuí-las às crianças pobres. Pelo grande favor que você nos fez, nós lhe daremos uma recompensa.";
   }
 
+  // Event Listener per les tecles de moviment.
   document.addEventListener("keydown", function (e) {
     const movementSpeed = 50;
 
@@ -124,13 +140,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Afegir un event listener al botó
+  // Event Listener per al botó "Sortir".
   const backButton = document.getElementById("backButton");
   backButton.addEventListener("click", function () {
-    // Redirigir l'usuari cap a la landing page (modifica la URL segons sigui necessari)
+    // Redirigeix l'usuari cap a la pàgina d'inici (modifica la URL segons sigui necessari).
     window.location.href = "ruta-de-la-landing-page.html";
   });
 
+  // Inicialitza el joc.
   restartGame();
+  // Comença el bucle de dibuix.
   draw();
 });
