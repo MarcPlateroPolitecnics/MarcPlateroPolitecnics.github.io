@@ -8,6 +8,17 @@
 </head>
 <body>
   <div id="title"><span id="gameTitle">Cientifiks en joc: Fruit Catcher (Brasil)</span></div>
+
+  <div id="startScreen" class="initial-screen">
+    <div id="instructions">
+      <h2>Cientifiks en joc: Fruit Catcher (Brasil)</h2>
+      <p>Benvingut a "Cientifiks en joc: Fruit Catcher (Brasil)".</p>
+      <p>Instruccions: La teva tasca és recollir fruites mentre evites perdre vides. Comences amb 5 vides, si cau alguna fruita al terra perds 1 vida i si arribes a 0 perds.
+        Per guanyar has de recollir 50 fruites, això sí, la dificultat va augmentant a mesura que vas recol·lectant les fruites i també canvia el tipus d'aquestes. Sortiran papaies,
+        plàtans i mànecs. Utilitza les tecles de fletxa esquerra i dreta per moure la cistella i atrapar totes les fruites que puguis.</p>
+    </div>
+    <button id="startButton">Comença a jugar</button>
+  </div>
   
   <div id="score">
     <img id="fruitsCollected" src="./img/fruits/papaya.png"></img>
@@ -17,8 +28,8 @@
 
   <div id="window">
     <img id="background" src="./img/backgrounds/brasilFondo1.jpg"></img>
-    <img id="player" src="./img/otherThings/basket.png"></img>
-    <img id="fruit" src="./img/fruits/papaya.png"></img>
+    <img id="player" class="hidden" src="./img/otherThings/basket.png"></img>
+    <img id="fruit" class="hidden" src="./img/fruits/papaya.png"></img>
   </div>
 
   <button id="backButton">Sortir</button>
