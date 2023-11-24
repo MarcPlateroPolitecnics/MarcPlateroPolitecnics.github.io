@@ -1,4 +1,3 @@
-// Espera a que el DOM (la part de html) estigui carregat.
 document.addEventListener("DOMContentLoaded", function () {
   // Obté elements del DOM.
   const gameContainer = document.getElementById("window");
@@ -7,6 +6,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const scoreValue = document.getElementById("scoreValue");
   const livesValue = document.getElementById("livesValue");
   const background = document.getElementById("background");
+  const startScreen = document.getElementById("startScreen");
+  const startButton = document.getElementById("startButton");
+
+  // Variable per controlar si el joc està en marxa o no.
+  let gameRunning = false;
+
+  // Event Listener pel botó d'inici.
+  startButton.addEventListener("click", function () {
+    // Oculta la pantalla inicial i comença el joc només si encara no s'ha iniciat.
+    if (!gameRunning) {
+      startScreen.style.display = "none";
+      gameRunning = true; // Marca el joc com a en marxa.
+      player.classList.remove("hidden"); // Mostra la imatge de la cesta.
+      fruit.classList.remove("hidden"); // Mostra la imatge de la papaya.
+      draw(); // Comença el bucle de dibuix.
+    }
+  });
 
   // Diferents constants del joc.
   const playerSize = 50;
@@ -35,67 +51,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Funció principal que actualitza el dibuix del joc.
   function draw() {
-    // Actualitza la posició del jugador i la fruita.
-    player.style.left = `${playerPos[0]}px`;
-    player.style.top = `${playerPos[1]}px`;
+    // Només actualitza la posició si el joc està en marxa.
+    if (gameRunning) {
+      // Actualitza la posició del jugador i la fruita.
+      player.style.left = `${playerPos[0]}px`;
+      player.style.top = `${playerPos[1]}px`;
 
-    fruit.style.left = `${fruitPos[0]}px`;
-    fruit.style.top = `${fruitPos[1]}px`;
+      fruit.style.left = `${fruitPos[0]}px`;
+      fruit.style.top = `${fruitPos[1]}px`;
 
-    // Actualitza la puntuació i les vides.
-    scoreValue.textContent = score;
-    livesValue.textContent = lives;
+      // Actualitza la puntuació i les vides.
+      scoreValue.textContent = score;
+      livesValue.textContent = lives;
 
-    // Mou la fruita cap avall.
-    fruitPos[1] += fruitSpeeds[currentLevel - 1];
+      // Mou la fruita cap avall.
+      fruitPos[1] += fruitSpeeds[currentLevel - 1];
 
-    // Comprova col·lisions amb el jugador.
-    if (
-      playerPos[0] < fruitPos[0] + fruitSize &&
-      playerPos[0] + playerSize > fruitPos[0] &&
-      playerPos[1] < fruitPos[1] + fruitSize &&
-      playerPos[1] + playerSize > fruitPos[1]
-    ) {
-      // Incrementa la puntuació i verifica si es passa al següent nivell.
-      score++;
-      if (score === levelThresholds[currentLevel]) {
-        if (currentLevel < levelThresholds.length - 1) {
-          currentLevel++;
-          changeBackground();
-          changeFruit();
+      // Comprova col·lisions amb el jugador.
+      if (
+        playerPos[0] < fruitPos[0] + fruitSize &&
+        playerPos[0] + playerSize > fruitPos[0] &&
+        playerPos[1] < fruitPos[1] + fruitSize &&
+        playerPos[1] + playerSize > fruitPos[1]
+      ) {
+        // Incrementa la puntuació i verifica si es passa al següent nivell.
+        score++;
+        if (score === levelThresholds[currentLevel]) {
+          if (currentLevel < levelThresholds.length - 1) {
+            currentLevel++;
+            changeBackground();
+            changeFruit();
+          }
         }
-      }
 
-      // Reinicia la posició de la fruita.
-      fruitPos = [
-        Math.random() * (gameContainer.clientWidth - fruitSize),
-        0,
-      ];
-    }
-
-    // Comprova si la fruita ha arribat a la part inferior del marc.
-    if (fruitPos[1] > gameContainer.clientHeight) {
-      // Redueix les vides i reinicia la posició de la fruita si encara hi ha vides.
-      lives--;
-      if (lives <= 0) {
-        restartGame();
-      } else {
+        // Reinicia la posició de la fruita.
         fruitPos = [
           Math.random() * (gameContainer.clientWidth - fruitSize),
           0,
         ];
       }
-    }
 
-    // Comprova si s'ha assolit la puntuació màxima.
-    if (score >= levelThresholds[levelThresholds.length - 1]) {
-      // Finalitza el joc.
-      endGame();
-      return;
-    }
+      // Comprova si la fruita ha arribat a la part inferior del marc.
+      if (fruitPos[1] > gameContainer.clientHeight) {
+        // Redueix les vides i reinicia la posició de la fruita si encara hi ha vides.
+        lives--;
+        if (lives <= 0) {
+          restartGame();
+        } else {
+          fruitPos = [
+            Math.random() * (gameContainer.clientWidth - fruitSize),
+            0,
+          ];
+        }
+      }
 
-    // Continua actualitzant el dibuix del joc.
-    requestAnimationFrame(draw);
+      // Comprova si s'ha assolit la puntuació màxima.
+      if (score >= levelThresholds[levelThresholds.length - 1]) {
+        // Finalitza el joc.
+        endGame();
+        return;
+      }
+
+      // Continua actualitzant el dibuix del joc.
+      requestAnimationFrame(draw);
+    }
   }
 
   // Canvia la imatge de fons segons el nivell actual.
