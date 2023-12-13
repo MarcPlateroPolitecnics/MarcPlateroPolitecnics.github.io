@@ -1,30 +1,54 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Obté elements del DOM.
+  // Ejecutar startGame al cargar la página.
+  startGame();
+
+  // Event Listener para el botón "Home".
+  const homeButton = document.getElementById("home");
+  homeButton.addEventListener("click", function () {
+    // Cierra el popup antes de redirigir al usuario a la página de inicio.
+    closePopup();
+    // Redirige al usuario a la página de inicio (ajusta la URL según sea necesario).
+    window.location.href = "../../LandingPage/LandingPage.html#juegos";
+  }); 
+});
+
+function openPopup() {
+  console.log("Opening popup");
+  document.getElementById('infoPopup').style.display = 'block';
+
+  // Oculta elementos del juego al abrir el popup
+  document.getElementById('window').style.display = 'none';
+  document.getElementById('scoreContainer').style.display = 'none';
+
+  // Reinicia automáticamente el juego al abrir el popup
+  restartGame();
+}
+
+function closePopup() {
+  console.log("Closing popup");
+  document.getElementById('infoPopup').style.display = 'none';
+
+  // Restaura la visibilidad de los elementos del juego al cerrar el popup
+  document.getElementById('window').style.display = 'block';
+  document.getElementById('scoreContainer').style.display = 'flex';
+
+  // Reinicia el juego
+  restartGame();
+}
+
+function startGame() {
+  // Obtén elementos del DOM.
   const gameContainer = document.getElementById("window");
   const player = document.getElementById("player");
   const fruit = document.getElementById("fruit");
   const scoreValue = document.getElementById("scoreValue");
   const livesValue = document.getElementById("livesValue");
   const background = document.getElementById("background");
-  const startScreen = document.getElementById("startScreen");
-  const startButton = document.getElementById("startButton");
 
-  // Variable per controlar si el joc està en marxa o no.
-  let gameRunning = false;
+  // Variable para controlar si el juego está en marcha o no.
+  let gameRunning = true;
 
-  // Event Listener pel botó d'inici.
-  startButton.addEventListener("click", function () {
-    // Oculta la pantalla inicial i comença el joc només si encara no s'ha iniciat.
-    if (!gameRunning) {
-      startScreen.style.display = "none";
-      gameRunning = true; // Marca el joc com a en marxa.
-      player.classList.remove("hidden"); // Mostra la imatge de la cesta.
-      fruit.classList.remove("hidden"); // Mostra la imatge de la papaya.
-      draw(); // Comença el bucle de dibuix.
-    }
-  });
-
-  // Diferents constants del joc.
+  // Diferentes constantes del juego.
   const playerSize = 50;
   const fruitSize = 30;
   const initialPlayerPos = [
@@ -36,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
     0,
   ];
   const initialBackground = "./img/backgrounds/brasilFondo1.jpg";
-  const fruitSpeeds = [3, 5, 6];
+  const fruitSpeeds = [3.5, 4.5, 5];
   let playerPos = [...initialPlayerPos];
   let fruitPos = [...initialFruitPos];
   let score = 0;
@@ -49,32 +73,32 @@ document.addEventListener("DOMContentLoaded", function () {
     "./img/fruits/mango.png"
   ];
 
-  // Funció principal que actualitza el dibuix del joc.
+  // Función principal que actualiza el dibujo del juego.
   function draw() {
-    // Només actualitza la posició si el joc està en marxa.
+    // Solo actualiza la posición si el juego está en marcha.
     if (gameRunning) {
-      // Actualitza la posició del jugador i la fruita.
+      // Actualiza la posición del jugador y la fruta.
       player.style.left = `${playerPos[0]}px`;
       player.style.top = `${playerPos[1]}px`;
 
       fruit.style.left = `${fruitPos[0]}px`;
       fruit.style.top = `${fruitPos[1]}px`;
 
-      // Actualitza la puntuació i les vides.
+      // Actualiza la puntuación y las vidas.
       scoreValue.textContent = score;
       livesValue.textContent = lives;
 
-      // Mou la fruita cap avall.
+      // Mueve la fruta hacia abajo.
       fruitPos[1] += fruitSpeeds[currentLevel - 1];
 
-      // Comprova col·lisions amb el jugador.
+      // Comprueba colisiones con el jugador.
       if (
         playerPos[0] < fruitPos[0] + fruitSize &&
         playerPos[0] + playerSize > fruitPos[0] &&
         playerPos[1] < fruitPos[1] + fruitSize &&
         playerPos[1] + playerSize > fruitPos[1]
       ) {
-        // Incrementa la puntuació i verifica si es passa al següent nivell.
+        // Incrementa la puntuación y verifica si se pasa al siguiente nivel.
         score++;
         if (score === levelThresholds[currentLevel]) {
           if (currentLevel < levelThresholds.length - 1) {
@@ -84,16 +108,17 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
 
-        // Reinicia la posició de la fruita.
+        // Reinicia la posición de la fruta y agrega una clase de animación.
         fruitPos = [
           Math.random() * (gameContainer.clientWidth - fruitSize),
           0,
         ];
-      }
+        fruit.classList.add('collected');
+        }
 
-      // Comprova si la fruita ha arribat a la part inferior del marc.
+      // Comprueba si la fruta ha llegado a la parte inferior del marco.
       if (fruitPos[1] > gameContainer.clientHeight) {
-        // Redueix les vides i reinicia la posició de la fruita si encara hi ha vides.
+        // Reduce las vidas y reinicia la posición de la fruta si aún hay vidas.
         lives--;
         if (lives <= 0) {
           restartGame();
@@ -105,29 +130,29 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
-      // Comprova si s'ha assolit la puntuació màxima.
+      // Comprueba si se ha alcanzado la puntuación máxima.
       if (score >= levelThresholds[levelThresholds.length - 1]) {
-        // Finalitza el joc.
+        // Finaliza el juego.
         endGame();
         return;
       }
 
-      // Continua actualitzant el dibuix del joc.
+      // Continúa actualizando el dibujo del juego.
       requestAnimationFrame(draw);
     }
   }
 
-  // Canvia la imatge de fons segons el nivell actual.
+  // Cambia la imagen de fondo según el nivel actual.
   function changeBackground() {
     background.src = `./img/backgrounds/brasilFondo${currentLevel + 1}.jpg`;
   }
 
-  // Canvia la imatge de la fruita segons el nivell actual.
+  // Cambia la imagen de la fruta según el nivel actual.
   function changeFruit() {
     fruit.src = fruits[currentLevel - 1];
   }
 
-  // Reinicia els valors del joc.
+  // Reinicia los valores del juego.
   function restartGame() {
     playerPos = [...initialPlayerPos];
     fruitPos = [...initialFruitPos];
@@ -138,14 +163,14 @@ document.addEventListener("DOMContentLoaded", function () {
     fruit.src = fruits[0];
   }
 
-  // Finalitza el joc i mostra un missatge final.
+  // Finaliza el juego y muestra un mensaje final.
   function endGame() {
     background.src = "./img/backgrounds/brasilFondoFinal.jpg";
     const endMessage = document.getElementById("endMessage");
-    endMessage.textContent = "Meninas da aldeia: Obrigado por colher as frutas, agora podemos distribuí-las às crianças pobres. Pelo grande favor que você nos fez, nós lhe daremos uma recompensa.";
+    // endMessage.textContent = "Meninas da aldeia: Obrigado por colher as frutas, agora podemos distribuí-las às crianças pobres. Pelo grande favor que você nos fez, nós lhe daremos uma recompensa.";
   }
 
-  // Event Listener per les tecles de moviment.
+  // Event Listener para las teclas de movimiento.
   document.addEventListener("keydown", function (e) {
     const movementSpeed = 50;
 
@@ -159,15 +184,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Event Listener per al botó "Sortir".
+  // Event Listener para el botón "Home".
   const backButton = document.getElementById("backButton");
   backButton.addEventListener("click", function () {
-    // Redirigeix l'usuari cap a la pàgina d'inici (modifica la URL segons sigui necessari).
-    window.location.href = "ruta-de-la-landing-page.html";
+    // Redirige al usuario a la página de inicio (ajusta la URL según sea necesario).
+    window.location.href = "../../LandingPage/LandingPage.html#juegos";
   });
 
-  // Inicialitza el joc.
+  // Inicializa el juego.
   restartGame();
-  // Comença el bucle de dibuix.
+  // Comienza el bucle de dibujo.
   draw();
-});
+};
