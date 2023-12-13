@@ -7,32 +7,57 @@
   <link rel="stylesheet" href="cientifiksEnJocBrasil.css">
 </head>
 <body>
-  <div id="title"><span id="gameTitle">Cientifiks en joc: Fruit Catcher (Brasil)</span></div>
+  <div id="title"><span id="gameTitle">Fruit Catcher</span></div>
 
-  <div id="startScreen" class="initial-screen">
-    <div id="instructions">
-      <h2>Cientifiks en joc: Fruit Catcher (Brasil)</h2>
-      <p>Benvingut a "Cientifiks en joc: Fruit Catcher (Brasil)".</p>
-      <p>Instruccions: La teva tasca és recollir fruites mentre evites perdre vides. Comences amb 5 vides, si cau alguna fruita al terra perds 1 vida i si arribes a 0 perds.
-        Per guanyar has de recollir 50 fruites, això sí, la dificultat va augmentant a mesura que vas recol·lectant les fruites i també canvia el tipus d'aquestes. Sortiran papaies,
-        plàtans i mànecs. Utilitza les tecles de fletxa esquerra i dreta per moure la cistella i atrapar totes les fruites que puguis.</p>
+  <!-- POP UP -->
+  <div class="popup" id="infoPopup">
+    <div class="popup-content">
+      <span class="close" onclick="closePopup()">&times;</span>
+      <div class="popup-text">
+        <h2>Cables de Barcelona</h2>
+        <h3>Ayuda a Laia a conectar los cables</h3>
+        <p>Hola amigos de YouTube, conecta los siguientes cables para hacer que Barcelona tenga luz de nuevo y
+          puedas ver cositas que pasan en la oscuridad...</p>
+      </div>
+      <div class="popup-image">
+        <img src="/LandingPage/Personajes/Laia.png" alt="Imagen de Laia" style="width: 100px; height: auto;">
+      </div>
     </div>
-    <button id="startButton">Comença a jugar</button>
   </div>
-  
-  <div id="score">
-    <img id="fruitsCollected" src="./img/fruits/papaya.png"></img>
-    <img id="fruitsCollected" src="./img/fruits/banana.png"></img>
-    <img id="fruitsCollected" src="./img/fruits/mango.png"></img> : <span id="scoreValue">0</span> | <img id="heart" src="./img/otherThings/heart.png"></img> : <span id="livesValue">5</span>
+
+<!-- FOOTER -->
+<div class="stage-footer">
+  <div class="col left">
+    <!-- Botón de info -->
+    <a class="button" href="#" onclick="openPopup()">Info</a>
   </div>
+  <div class="col center">
+    <div id="scoreContainer">
+      <div class="fruitsCollectedContainer">
+        <img class="fruitsCollectedIcon" src="./img/fruits/papaya.png"></img>
+        <img class="fruitsCollectedIcon" src="./img/fruits/banana.png"></img>
+        <img class="fruitsCollectedIcon" src="./img/fruits/mango.png"></img>
+        <span class="fruitsCollectedText">: <span id="scoreValue">0</span></span>
+      </div>
+      <div class="livesContainer">
+        <img id="heart" src="./img/otherThings/heart.png"></img>
+        <span class="livesText">: <span id="livesValue">5</span></span>
+      </div>
+    </div>    
+  </div>
+  <div class="col right buttons">
+    <!-- Botón de home -->
+    <a class="button" id="home" href="../../LandingPage/LandingPage.html#juegos">Home</a>
+  </div>
+</div>
 
   <div id="window">
     <img id="background" src="./img/backgrounds/brasilFondo1.jpg"></img>
-    <img id="player" class="hidden" src="./img/otherThings/basket.png"></img>
-    <img id="fruit" class="hidden" src="./img/fruits/papaya.png"></img>
+    <img id="player" src="./img/otherThings/basket.png"></img>
+    <img id="fruit" src="./img/fruits/papaya.png"></img>
   </div>
 
-  <button id="backButton">Sortir</button>
+  <button id="backButton" display: hidden>Sortir</button>
   <div id="endMessage"></div>
   <script src="cientifiksEnJocBrasil.js"></script>
 </body>
