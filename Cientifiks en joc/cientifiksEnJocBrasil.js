@@ -16,6 +16,11 @@ function openPopup() {
   console.log("Opening popup");
   document.getElementById('infoPopup').style.display = 'block';
 
+  // Aplica estils al botó de tancar
+  const closeButton = document.querySelector('.popup .close');
+  closeButton.style.fontSize = "30px";
+  closeButton.style.color = "red";
+
   // Oculta elementos del juego al abrir el popup
   document.getElementById('window').style.display = 'none';
   document.getElementById('scoreContainer').style.display = 'none';
@@ -165,11 +170,55 @@ function startGame() {
 
   // Finaliza el juego y muestra un mensaje final.
   function endGame() {
-    background.src = "./img/backgrounds/brasilFondoFinal.jpg";
-    const endMessage = document.getElementById("endMessage");
-    // endMessage.textContent = "Meninas da aldeia: Obrigado por colher as frutas, agora podemos distribuí-las às crianças pobres. Pelo grande favor que você nos fez, nós lhe daremos uma recompensa.";
+    // Crear un nuevo elemento de mensaje
+    let mensajeFinal = document.createElement("div");
+    mensajeFinal.className = "popup";
+    mensajeFinal.id = "MensajeFinal";
+  
+    let divPopUp = document.createElement("div");
+    divPopUp.className = "popup-content";
+  
+    let divPopUpText = document.createElement("div");
+    divPopUpText.className = "popup-text";
+  
+    let h2GameOver = document.createElement("h2");
+    h2GameOver.textContent = `¡Juego terminado!`;
+    divPopUpText.appendChild(h2GameOver);
+  
+    let pGameOver = document.createElement("p");
+    pGameOver.textContent = `¡Felicidades, has conseguido las 50 frutas!`;
+    divPopUpText.appendChild(pGameOver);
+  
+    divPopUp.appendChild(divPopUpText);
+  
+    let btnHome = document.createElement("button");
+    btnHome.className = "btn";
+    btnHome.textContent = "Volver al Home";
+  
+    // Establecer el color de fondo del botón con tu color personalizado
+    btnHome.style.backgroundColor = "#B5D8A0";
+  
+    // Establecer el color del texto del botón
+    btnHome.style.color = "black";
+  
+    btnHome.addEventListener("click", goHome);
+    divPopUpText.appendChild(btnHome);
+  
+    mensajeFinal.appendChild(divPopUp);
+  
+    // Agregar el mensaje al cuerpo del documento
+    document.body.appendChild(mensajeFinal);
+  
+    // Mostrar el mensaje
+    mensajeFinal.style.display = "block";
   }
-
+  
+  // Función para redirigir a la página de inicio
+  function goHome() {
+    // Redirige al usuario a la página de inicio (ajusta la URL según sea necesario).
+    window.location.href = "../../LandingPage/LandingPage.html#juegos";
+  }
+  
   // Event Listener para las teclas de movimiento.
   document.addEventListener("keydown", function (e) {
     const movementSpeed = 50;
