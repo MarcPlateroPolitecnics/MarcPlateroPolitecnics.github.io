@@ -4,23 +4,34 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cientifiks en joc: Fruit Catcher (Brasil)</title>
+
+      <!-- Agrega estos enlaces en la sección head de tu HTML -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"></script>
+
   <link rel="stylesheet" href="cientifiksEnJocBrasil.css">
 </head>
 <body>
-  <div id="title"><span id="gameTitle">Fruit Catcher</span></div>
+<div id="title" class="d-flex justify-content-center align-items-center">
+  <span id="gameTitle">Fruit Catcher</span>
+</div>
 
   <!-- POP UP -->
   <div class="popup" id="infoPopup">
     <div class="popup-content">
       <span class="close" onclick="closePopup()">&times;</span>
       <div class="popup-text">
-        <h2>Cables de Barcelona</h2>
-        <h3>Ayuda a Laia a conectar los cables</h3>
-        <p>Hola amigos de YouTube, conecta los siguientes cables para hacer que Barcelona tenga luz de nuevo y
-          puedas ver cositas que pasan en la oscuridad...</p>
+        <h2>Fruit Catcher</h2>
+        <h3>Ajuda a en Cauan a recollir les fruites</h3>
+        <p>La teva tasca és recollir fruites mentre evites perdre vides. Comences amb 5 vides, si cau alguna fruita al terra perds 1 vida i si arribes a 0 perds.
+          Per guanyar has de recollir 50 fruites, això sí, la dificultat va augmentant a mesura que vas recol·lectant les fruites i també canvia el tipus d'aquestes. Sortiran papaies,
+          plàtans i mànecs. Utilitza les tecles de fletxa esquerra i dreta per moure la cistella i atrapar totes les fruites que puguis.</p>
       </div>
       <div class="popup-image">
-        <img src="/LandingPage/Personajes/Laia.png" alt="Imagen de Laia" style="width: 100px; height: auto;">
+        <img src="/LandingPage/Personajes/Cauan.png" alt="Imagen de Laia" style="width: 100px; height: auto;">
       </div>
     </div>
   </div>
